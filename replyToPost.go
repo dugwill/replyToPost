@@ -10,13 +10,13 @@ import (
 var t, _ = template.ParseFiles(
 	"index.html",
 	"login.html",
-	"bob.html",
+	"reply.html",
 )
 
 func main() {
 	http.HandleFunc("/index", index) // setting router rule
 	http.HandleFunc("/login", login)
-	http.HandleFunc("/bob", bob)
+	http.HandleFunc("/reply", reply)
 
 	err := http.ListenAndServe(":9090", nil) // setting listening port
 	if err != nil {
@@ -67,18 +67,18 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func bob(w http.ResponseWriter, r *http.Request) {
+func reply(w http.ResponseWriter, r *http.Request) {
 
 	data := struct {
 		Title  string
 		Header string
 		Name   string
 	}{
-		Title:  "Bob Page",
-		Header: "Bob",
+		Title:  "Reply Page",
+		Header: "This is a reply",
 	}
 
-	fmt.Println("bob")
+	fmt.Println("Reply")
 
 	err := r.ParseForm()
 	if err != nil {
@@ -89,7 +89,7 @@ func bob(w http.ResponseWriter, r *http.Request) {
 	data.Header = r.FormValue("password")
 	fmt.Printf("Hello, %s!", data.Name)
 
-	if err := t.ExecuteTemplate(w, "bob.html", data); err != nil {
+	if err := t.ExecuteTemplate(w, "reply.html", data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
