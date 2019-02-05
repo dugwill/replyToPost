@@ -79,11 +79,17 @@ func bob(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("bob")
-	name := r.PostFormValue("name")
-	fmt.Fprintf(w, "Hello, %s!", name)
-	data.Name = name
 
-	if err := t.ExecuteTemplate(w, "l.htbobl", data); err != nil {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data.Name = r.FormValue("username")
+	data.Header = r.FormValue("password")
+	fmt.Printf("Hello, %s!", data.Name)
+
+	if err := t.ExecuteTemplate(w, "bob.html", data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
