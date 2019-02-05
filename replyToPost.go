@@ -27,6 +27,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 		// logic part of log in
 		fmt.Println("username:", r.Form["username"])
 		fmt.Println("password:", r.Form["password"])
+
+		t, _ := template.ParseFiles("test.html")
+		t.Execute(w, nil)
 	}
 }
 
