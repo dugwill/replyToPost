@@ -50,14 +50,17 @@ func login(w http.ResponseWriter, r *http.Request) {
 		Title  string
 		Header string
 		Name   string
-		Reply	bool
+		Reply  bool
 	}{
 		Title:  "Login page",
 		Header: "Login",
 	}
 
-	if r.Method == "Get" {
-		fmt.Printf("Http Method: %v",r.Method)
+	fmt.Println("Login page")
+	fmt.Printf("Http Method: %v", r.Method)
+
+	if r.Method == "GET" {
+		fmt.Printf("Http Method: %v", r.Method)
 
 		data.Reply = false
 		fmt.Println("index")
@@ -71,8 +74,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 		//t.ExecuteTemplate(w, "index.html", data)
 	}
 
-	if r.Method == "post" {
-		fmt.Printf("Http Method: %v",r.Method)
+	if r.Method == "POST" {
+		fmt.Printf("Http Method: %v", r.Method)
 		data.Reply = true
 
 		if err := t.ExecuteTemplate(w, "login.html", data); err != nil {
