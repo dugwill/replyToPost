@@ -1,18 +1,23 @@
 <html>
     <head>
         <title>Page</title>
+
+
     </head>
     <body>
         <form action="/login" method="post">
-            Username:<input type="text" name="username">
-            Password:<input type="password" name="password">
+           Name:<input type="text" name="Name">
+           Address:<input type="password" name="address">
             <input type="submit" value="Login">
         </form>
 
         {{if .Reply}}
-        <h2>Print jpegs here</h2>
+        {{$cnt := 5}}
+        <h2>Byte Me</h2><br>
+        {{$cnt}}<br>
+        {{$cnt=4}}
+        {{$cnt}}
         {{end}}
-
 
     </body>
 </html>

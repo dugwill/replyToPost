@@ -7,11 +7,12 @@ import (
 	"net/http"
 )
 
+/*
 var t, _ = template.ParseFiles(
 	"index.html",
-	"login.html",
 	"reply.html",
 )
+*/
 
 func main() {
 	http.HandleFunc("/index", index) // setting router rule
@@ -37,6 +38,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("index")
+
+	var t, _ = template.ParseFiles("index.html")
 
 	if err := t.ExecuteTemplate(w, "index.html", data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -65,6 +68,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		data.Reply = false
 		fmt.Println("index")
 
+		var t, _ = template.ParseFiles("login.html")
 		if err := t.ExecuteTemplate(w, "login.html", data); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -78,6 +82,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Http Method: %v", r.Method)
 		data.Reply = true
 
+		var t, _ = template.ParseFiles("login.html")
 		if err := t.ExecuteTemplate(w, "login.html", data); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -107,6 +112,8 @@ func reply(w http.ResponseWriter, r *http.Request) {
 	data.Name = r.FormValue("username")
 	data.Header = r.FormValue("password")
 	fmt.Printf("Hello, %s!", data.Name)
+
+	var t, _ = template.ParseFiles("reply.html")
 
 	if err := t.ExecuteTemplate(w, "reply.html", data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
