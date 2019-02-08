@@ -1,23 +1,18 @@
 <html>
     <head>
         <title>Page</title>
-
-
     </head>
     <body>
         <form action="/login" method="post">
            Name:<input type="text" name="Name">
-           Address:<input type="password" name="address">
+           Address:<input type="text" name="address">
             <input type="submit" value="Login">
         </form>
-
-        {{if .Reply}}
         {{$cnt := 5}}
-        <h2>Byte Me</h2><br>
-        {{$cnt}}<br>
-        {{$cnt=4}}
-        {{$cnt}}
-        {{end}}
+        {{if .Reply}}
+            <h2>Byte Me</h2><br>
+            {{$cnt}}<br>
+            {{$cnt = 4}}
 
     </body>
 </html>
